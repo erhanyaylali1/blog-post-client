@@ -1,34 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blog-Post
 
-## Getting Started
+DESCRIPTION
+--------------------------------
+- A blog with rich text editor
 
-First, run the development server:
+Features
+--------------------------------
+- Rich Text Editor
+- Create Post
+- Edit Post
+- Add Categories to Posts
+- Add Tags to Posts
+- Upload Image
+- Like to Post
+- Comment to Post
+- View Count
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Technologies
+--------------------------------
+- Next JS
+- Node JS
+- Mongo DB with Mongoose
+- Swagger io
+- Google Cloud (to do)
+- Bootstrap, Material UI, Ant Design
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Login Page
+![image](https://user-images.githubusercontent.com/32177766/174133093-eb398bd4-4087-4a36-84f1-8ce0c14b8a7a.png)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+--------------
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Register Page
+![image](https://user-images.githubusercontent.com/32177766/174134823-a50da8a8-caf8-499c-97c4-95656b9a54f9.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+--------------
 
-## Learn More
+### Home Page
+![image](https://user-images.githubusercontent.com/32177766/174133127-a35c9d5f-c956-4a0a-a8f0-24f6975947be.png)
 
-To learn more about Next.js, take a look at the following resources:
+--------------
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Create Post Page
+![image](https://user-images.githubusercontent.com/32177766/174134358-641e5e94-8ec1-464c-9123-f94930ce2ccd.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+--------------
 
-## Deploy on Vercel
+### View Post Page
+![image](https://user-images.githubusercontent.com/32177766/174304295-09e75ee5-b6a4-4176-a2b9-61bb77ea9a1c.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+--------------
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Edit Post Page (If user is author or admin)
+![image](https://user-images.githubusercontent.com/32177766/174134515-c2537a1a-b1e9-4bf6-93c8-4d84eeb01936.png)
+
+--------------
+
+### Categories Page
+![image](https://user-images.githubusercontent.com/32177766/174134657-83251da1-55d8-4187-b4e7-739174e91e5b.png)
+
+--------------
+
+### Create Category Modal (Only Admin)
+![image](https://user-images.githubusercontent.com/32177766/174134738-2e5b8510-a932-4b63-b052-95cfccf764d2.png)
+
+--------------
+
+### Create Tag Modal (Only Admin)
+![image](https://user-images.githubusercontent.com/32177766/174135101-62443cca-9d63-4a38-8768-8a67caa73b55.png)
+
