@@ -1,0 +1,11 @@
+.form {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.error {
+  color: #ca0000;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 500;
+}

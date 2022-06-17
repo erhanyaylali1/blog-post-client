@@ -1,0 +1,239 @@
+import fetch from 'isomorphic-fetch';
+import { API } from '../config/config';
+
+// AUTH APIs
+
+export const registerToServer = (user) => {
+  return fetch(`${API}/auth/register`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const loginToServer = (user) => {
+  return fetch(`${API}/auth/login`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const logoutFromServer = () => {
+  return fetch(`${API}/auth/logout`, { method: 'GET' })
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error));
+};
+
+// Category APIs
+
+export const createCategory = (category, token) => {
+  return fetch(`${API}/category`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(category),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getCategories = (token) => {
+  return fetch(`${API}/category`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const deleteCategory = (token, slug) => {
+  return fetch(`${API}/category/${slug}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+// TAG APIs
+
+export const createTag = (tag, token) => {
+  return fetch(`${API}/tag`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(tag),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getTags = (token) => {
+  return fetch(`${API}/tag`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const deleteTag = (token, slug) => {
+  return fetch(`${API}/tag/${slug}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+// POST APIs
+
+export const getPosts = () => {
+  return fetch(`${API}/post`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const createPost = (body, token) => {
+  return fetch(`${API}/post`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body,
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getPost = (id) => {
+  return fetch(`${API}/post/${id}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const editPost = (id, body, token) => {
+  return fetch(`${API}/post/${id}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body,
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const deletePost = (id, token) => {
+  return fetch(`${API}/post/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const likePost = (id, token) => {
+  return fetch(`${API}/post/${id}/like`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const unlikePost = (id, token) => {
+  return fetch(`${API}/post/${id}/unlike`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const shareComment = (id, token, body) => {
+  return fetch(`${API}/post/${id}/comment`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const deleteComment = (id, comment_id, token) => {
+  return fetch(`${API}/post/${id}/comment/${comment_id}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const increaseViewCount = (id) => {
+  return fetch(`${API}/post/${id}/view`, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
