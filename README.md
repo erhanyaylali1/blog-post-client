@@ -55,6 +55,11 @@ Technologies
 
 --------------
 
+### User Profile Page
+![image](https://user-images.githubusercontent.com/32177766/174458280-a333719f-ba8c-4d43-bee2-54c224ae7f95.png)
+
+--------------
+
 ### Categories Page
 ![image](https://user-images.githubusercontent.com/32177766/174134657-83251da1-55d8-4187-b4e7-739174e91e5b.png)
 
