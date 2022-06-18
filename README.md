@@ -68,3 +68,17 @@ Technologies
 ### Create Tag Modal (Only Admin)
 ![image](https://user-images.githubusercontent.com/32177766/174135101-62443cca-9d63-4a38-8768-8a67caa73b55.png)
 
+
+--------------
+
+### Category Page
+![image](https://user-images.githubusercontent.com/32177766/174457734-79efb3b6-61cf-4349-8c28-e24887976651.png)
+
+
+--------------
+
+### Tag Page
+![image](https://user-images.githubusercontent.com/32177766/174457751-a3acda29-b6cb-4f4e-a03a-fa0fc90928c5.png)
+
+
+
