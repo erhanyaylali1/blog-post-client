@@ -34,3 +34,12 @@
 .categories_container::-webkit-scrollbar-thumb:hover {
   background-color: #a8bbbf;
 }
+
+/* Category View Page */
+
+.category_header_main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}

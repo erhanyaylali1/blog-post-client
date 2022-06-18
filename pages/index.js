@@ -5,9 +5,11 @@ import { isAuth } from '../utils/browserOperations';
 import { Empty, message } from 'antd';
 import HomePagePostCard from '../components/post/HomePagePostCard';
 import Link from 'next/link';
+import { CircularProgress } from '@mui/material';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState([]);
 
   const user = isAuth();
   const isLogged = user ? true : false;
@@ -17,9 +19,11 @@ const Home = () => {
   }, []);
 
   const fetchPosts = () => {
+    setLoading(true);
     getPosts().then((response) => {
       if (response.error) message.error(message.error, 1);
       else setPosts(response.posts);
+      setLoading(false);
     });
   };
 
@@ -38,6 +42,12 @@ const Home = () => {
   };
 
   const renderPosts = () => {
+    if (loading)
+      return (
+        <div className="my-5 w-100 text-center">
+          <CircularProgress />
+        </div>
+      );
     if (posts.length > 0) {
       return posts.map((post) => (
         <HomePagePostCard post={post} key={post._id} />

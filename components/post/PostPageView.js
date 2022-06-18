@@ -26,7 +26,7 @@ const PostPageView = ({ post, refreshPage }) => {
   const [newCommentLoading, setNewCommentLoading] = useState(false);
 
   const renderCategories = () => {
-    return post.categories.map((category) => {
+    return post?.categories?.map((category) => {
       return (
         <Link href={`/categories/${category._id}`} key={category._id}>
           <div className="mr-2 mb-2" style={{ cursor: 'pointer' }}>
@@ -46,7 +46,7 @@ const PostPageView = ({ post, refreshPage }) => {
   };
 
   const renderTags = () => {
-    return post.tags.map((tag) => {
+    return post?.tags?.map((tag) => {
       return (
         <Link href={`/tags/${tag._id}`} key={tag._id}>
           <div className="mr-2 mb-2" style={{ cursor: 'pointer' }}>
@@ -214,13 +214,13 @@ const PostPageView = ({ post, refreshPage }) => {
             <Avatar
               name={post?.user_id?.full_name}
               image={post?.user_id?.photo}
-              link={`/users/${post.user_id._id}`}
+              link={`/users/${post?.user_id?._id}`}
               size="40"
             />
           </div>
           <div className={styles.author}>{post?.user_id?.full_name}</div>
           <div className="row ml-4 text-muted mt-1">
-            {getRelativeTime(post.createdAt)}
+            {post?.createdAt ? getRelativeTime(post.createdAt) : null}
           </div>
         </div>
         <div className="col">
@@ -270,11 +270,11 @@ const PostPageView = ({ post, refreshPage }) => {
       </div>
       <div className="col mt-1 w-100">
         <div className="w-100 mb-4">
-          <p className={styles.post_title}>{post.title}</p>
+          <p className={styles.post_title}>{post?.title}</p>
         </div>
         <div
           className="mb-5 col"
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: post?.content }}
         />
         <div className="d-flex flex-column w-100 mb-3">
           <div className="d-flex flex-column">

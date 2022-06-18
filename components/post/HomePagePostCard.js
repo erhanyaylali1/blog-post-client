@@ -11,14 +11,14 @@ import { useRouter } from 'next/router';
 const HomePagePostCard = ({ post }) => {
   const router = useRouter();
 
-  const navigateToPost = () => router.push(`post/${post._id}`);
+  const navigateToPost = () => router.push(`/post/${post._id}`);
   const navigateToAuthor = () => router.push(`/`);
 
   return (
     <Card className="mb-5 w-100">
       <div className="row m-0 p-0">
         {post?.photo && (
-          <div className="col-4 p-0" style={{ height: '230px' }}>
+          <div className="col-4 p-0" style={{ height: '200px' }}>
             <CardMedia
               component="img"
               sx={{ height: '100%', width: '100%' }}
@@ -33,7 +33,7 @@ const HomePagePostCard = ({ post }) => {
         )}
         <div
           className={`${post?.photo ? 'col-8' : 'col-12'} pl-3`}
-          style={{ height: '230px' }}>
+          style={{ height: '200px' }}>
           <CardContent
             style={{ paddingBottom: '10px' }}
             className="h-100 d-flex flex-column">

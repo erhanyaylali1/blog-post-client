@@ -63,6 +63,22 @@ export const getCategories = (token) => {
     .catch((error) => console.log(error));
 };
 
+export const getCategory = (id) => {
+  return fetch(`${API}/category/${id}`, {
+    method: 'GET',
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getCategoryPosts = (id, filter) => {
+  return fetch(`${API}/category/${id}/posts?filter=${filter}`, {
+    method: 'GET',
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
 export const deleteCategory = (token, slug) => {
   return fetch(`${API}/category/${slug}`, {
     method: 'DELETE',
@@ -98,6 +114,22 @@ export const getTags = (token) => {
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getTag = (id) => {
+  return fetch(`${API}/tag/${id}`, {
+    method: 'GET',
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getTagPosts = (id, filter) => {
+  return fetch(`${API}/tag/${id}/posts?filter=${filter}`, {
+    method: 'GET',
   })
     .then((response) => response.json())
     .catch((error) => console.log(error));

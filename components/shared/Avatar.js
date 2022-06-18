@@ -42,7 +42,7 @@ const Avatar = ({ image, name, size, link }) => {
           }}
         />
       ) : (
-        <div style={initials_style}>{name[0]}</div>
+        <div style={initials_style}>{name?.[0] || ''}</div>
       )}
     </Link>
   );

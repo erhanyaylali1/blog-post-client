@@ -16,17 +16,17 @@ const PostPageEdit = ({ post, refreshPage }) => {
   const user = isAuth();
   const token = getCookie('token');
 
-  const [title, setTitle] = useState(post.title || '');
+  const [title, setTitle] = useState(post?.title || '');
 
   const [categories, setCategories] = useState([]);
   const [newTag, setNewTag] = useState('');
   const [mode, setMode] = useState('View');
 
   const [selectedCategories, setSelectedCategories] = useState(
-    post.categories.map((category) => category._id)
+    post?.categories?.map((category) => category._id)
   );
   const [selectedTags, setSelectedTags] = useState(
-    post.tags.map((tag) => tag.name)
+    post?.tags?.map((tag) => tag.name)
   );
 
   const [image, setImage] = useState(null);
