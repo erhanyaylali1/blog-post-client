@@ -73,17 +73,20 @@ const PostPageView = ({ post, refreshPage }) => {
   const toggleLike = () => {
     if (user && token) {
       if (isUserLikedThisPost()) {
-        unlikePost(post._id, token).then((res) => {
-          if (res.error) message.error(res.error, 0.5);
-          else message.success(res.message, 0.5);
-        });
+        unlikePost(post._id, token)
+          .then((res) => {
+            if (res.error) message.error(res.error, 0.5);
+            else message.success(res.message, 0.5);
+          })
+          .then(() => refreshPage());
       } else {
-        likePost(post._id, token).then((res) => {
-          if (res.error) message.error(res.error, 0.5);
-          else message.success(res.message, 0.5);
-        });
+        likePost(post._id, token)
+          .then((res) => {
+            if (res.error) message.error(res.error, 0.5);
+            else message.success(res.message, 0.5);
+          })
+          .then(() => refreshPage());
       }
-      refreshPage();
     }
   };
 

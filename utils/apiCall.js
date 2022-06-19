@@ -272,6 +272,17 @@ export const increaseViewCount = (id) => {
 
 // USER API
 
+export const getUsers = () => {
+  return fetch(`${API}/user`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
 export const getUser = (id) => {
   return fetch(`${API}/user/${id}`, {
     method: 'GET',
@@ -305,6 +316,28 @@ export const getUserTrends = (id) => {
     .catch((error) => console.log(error));
 };
 
+export const getUserLikes = (id) => {
+  return fetch(`${API}/user/${id}/likes`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getUserComments = (id) => {
+  return fetch(`${API}/user/${id}/comments`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
 export const updateUser = (id, body, token) => {
   return fetch(`${API}/user/${id}`, {
     method: 'PUT',
@@ -313,6 +346,32 @@ export const updateUser = (id, body, token) => {
       Authorization: `Bearer ${token}`,
     },
     body,
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const updateUserRole = (id, body, token) => {
+  return fetch(`${API}/user/${id}/role`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const deleteUser = (id, token) => {
+  return fetch(`${API}/user/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
   })
     .then((response) => response.json())
     .catch((error) => console.log(error));

@@ -17,6 +17,10 @@ body {
   align-items: center !important;
 }
 
+.ant-table-wrapper {
+  width: 100%;
+}
+
 .post-statics .ant-statistic-content {
   cursor: pointer;
   margin-top: 8px;

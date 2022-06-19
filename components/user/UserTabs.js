@@ -1,26 +1,65 @@
 import React, { useEffect, useState } from 'react';
 import { Segmented, message } from 'antd';
-import { getUserPosts } from '../../utils/apiCall';
+import {
+  getUserComments,
+  getUserLikes,
+  getUserPosts,
+} from '../../utils/apiCall';
 import HomePagePostCard from '../post/HomePagePostCard';
+import { CircularProgress } from '@mui/material';
 
 const UserTabs = ({ user }) => {
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('Posts');
   const [posts, setPosts] = useState(null);
+  const [likes, setLikes] = useState(null);
+  const [comments, setComments] = useState(null);
   const id = user?._id;
 
   useEffect(() => {
     if (id && value === 'Posts' && posts === null) {
+      setLoading(true);
       getUserPosts(id).then((response) => {
         if (response.error) message.error(response.error);
         else setPosts(response.posts);
+        setLoading(false);
+      });
+    } else if (id && value === 'Likes' && likes === null) {
+      setLoading(true);
+      getUserLikes(id).then((response) => {
+        if (response.error) message.error(response.error);
+        else setLikes(response.posts);
+        setLoading(false);
+      });
+    } else if (id && value === 'Comments' && comments === null) {
+      setLoading(true);
+      getUserComments(id).then((response) => {
+        if (response.error) message.error(response.error);
+        else setComments(response.posts);
+        setLoading(false);
       });
     }
   }, [id, value]);
 
   const renderTabs = () => {
+    if (loading) {
+      return (
+        <div className="my-5 w-100 h-100 d-flex align-items-center justify-content-center">
+          <CircularProgress />
+        </div>
+      );
+    }
     if (value === 'Posts' && posts?.length > 0) {
       return posts.map((post) => (
         <HomePagePostCard post={{ ...post, user_id: user }} key={post._id} />
+      ));
+    } else if (value === 'Likes' && likes?.length > 0) {
+      return likes.map((post) => (
+        <HomePagePostCard post={post} key={post._id} />
+      ));
+    } else if (value === 'Comments' && comments?.length > 0) {
+      return comments.map((post) => (
+        <HomePagePostCard post={post} key={post._id} />
       ));
     }
   };

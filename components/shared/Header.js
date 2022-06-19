@@ -5,11 +5,13 @@ import { useRouter } from 'next/router';
 import { NAME } from '../../config/config';
 import { isAuth, signOut } from '../../utils/browserOperations';
 import { logoutFromServer } from '../../utils/apiCall';
+import UserRoles from '../../config/UserRoles';
 
 const Header = () => {
   const router = useRouter();
   const user = isAuth();
   const isLogged = user ? true : false;
+  const isAdmin = isLogged && user.role === UserRoles.Admin;
 
   const logout = () => {
     signOut(functionAfterLogout);
@@ -23,6 +25,12 @@ const Header = () => {
   const navigateUser = () => {
     if (isLogged) {
       router.push(`/user/${user._id}`);
+    }
+  };
+
+  const navigateToAdmin = () => {
+    if (isAdmin) {
+      router.push('/admin');
     }
   };
 
@@ -44,6 +52,11 @@ const Header = () => {
               <NavItem style={navItemStyle} onClick={navigateUser}>
                 <NavLink>Dashboard</NavLink>
               </NavItem>
+              {isAdmin ? (
+                <NavItem style={navItemStyle} onClick={navigateToAdmin}>
+                  <NavLink>Admin Dashboard</NavLink>
+                </NavItem>
+              ) : null}
               <NavItem style={navItemStyle} onClick={logout}>
                 <NavLink>Logout</NavLink>
               </NavItem>
