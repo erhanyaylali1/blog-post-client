@@ -137,7 +137,7 @@ const PostPageView = ({ post, refreshPage }) => {
                   <Comment
                     actions={actionButtons}
                     author={
-                      <Link href={`/users/${item.user_id._id}`}>
+                      <Link href={`/user/${item.user_id._id}`}>
                         {item.user_id.full_name}
                       </Link>
                     }
@@ -146,7 +146,7 @@ const PostPageView = ({ post, refreshPage }) => {
                         name={item.user_id.full_name}
                         image={item.user_id?.photo}
                         size="40"
-                        link={`/users/${item.user_id._id}`}
+                        link={`/user/${item.user_id._id}`}
                       />
                     }
                     content={item.content}
@@ -163,7 +163,7 @@ const PostPageView = ({ post, refreshPage }) => {
                   name={user.full_name}
                   image={user?.photo}
                   size="40"
-                  link={`/users/${user._id}`}
+                  link={`/user/${user._id}`}
                 />
               }
               content={renderNewCommentTextArea()}
@@ -214,7 +214,7 @@ const PostPageView = ({ post, refreshPage }) => {
             <Avatar
               name={post?.user_id?.full_name}
               image={post?.user_id?.photo}
-              link={`/users/${post?.user_id?._id}`}
+              link={`/user/${post?.user_id?._id}`}
               size="40"
             />
           </div>

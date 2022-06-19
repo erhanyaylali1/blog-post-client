@@ -7,12 +7,15 @@ import { deleteTag, getTags } from '../../utils/apiCall';
 import { getCookie, isAuth } from '../../utils/browserOperations';
 import CreateCategoryModal from './CreateTagModal';
 import styles from './tag.module.css';
+import { CircularProgress } from '@mui/material';
+import { Popconfirm } from 'antd';
 
 const Tag = () => {
   const router = useRouter();
   const [tags, setTags] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [showCreateTagModal, setShowCreateTagModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const user = isAuth();
 
   useEffect(() => {
@@ -24,28 +27,38 @@ const Tag = () => {
   const fetchTags = async () => {
     const token = getCookie('token');
     if (token) {
-      getTags(token).then((response) =>
-        setTags(response.tags.sort((a, b) => (a.count < b.count ? 1 : -1)))
-      );
+      setLoading(true);
+      getTags(token).then((response) => {
+        if (response.error) message.error(response.error, 1);
+        else {
+          setTags(response.tags.sort((a, b) => (a.count < b.count ? 1 : -1)));
+        }
+        setLoading(false);
+      });
     }
   };
 
   const handleDeleteTag = (slug) => {
-    if (confirm('Are you sure you want to delete this tag?')) {
-      const token = getCookie('token');
-      if (token) {
-        deleteTag(token, slug).then((response) => {
-          if (response.error) message.error(response.error, 1);
-          else {
-            message.success(response.message, 1);
-            setRefresh((prev) => !prev);
-          }
-        });
-      }
+    const token = getCookie('token');
+    if (token) {
+      deleteTag(token, slug).then((response) => {
+        if (response.error) message.error(response.error, 1);
+        else {
+          message.success(response.message, 1);
+          setRefresh((prev) => !prev);
+        }
+        setLoading(false);
+      });
     }
   };
 
   const renderTags = () => {
+    if (loading)
+      return (
+        <div className="my-5 w-100 text-center">
+          <CircularProgress />
+        </div>
+      );
     if (tags.length > 0) {
       return tags.map((tag, index) => (
         <li
@@ -60,12 +73,18 @@ const Tag = () => {
             <span className="badge badge-primary badge-pill mr-2">
               {tag.count}
             </span>
-            <span
-              className="badge badge-danger"
-              onClick={() => handleDeleteTag(tag.slug)}
-              style={{ cursor: 'pointer' }}>
-              Delete
-            </span>
+            <Popconfirm
+              placement="topLeft"
+              title={'Are you sure you want to delete this tag?'}
+              onConfirm={() => handleDeleteTag(tag.slug)}
+              okText="Yes"
+              cancelText="No">
+              <span
+                className="badge badge-danger"
+                style={{ cursor: 'pointer' }}>
+                Delete
+              </span>
+            </Popconfirm>
           </div>
         </li>
       ));

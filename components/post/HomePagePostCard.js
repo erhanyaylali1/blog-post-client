@@ -12,7 +12,7 @@ const HomePagePostCard = ({ post }) => {
   const router = useRouter();
 
   const navigateToPost = () => router.push(`/post/${post._id}`);
-  const navigateToAuthor = () => router.push(`/`);
+  const navigateToAuthor = () => router.push(`/user/${post.user_id._id}`);
 
   return (
     <Card className="mb-5 w-100">
@@ -54,8 +54,14 @@ const HomePagePostCard = ({ post }) => {
                 <div style={{ cursor: 'pointer' }} onClick={navigateToAuthor}>
                   <Avatar
                     name={post.user_id.full_name}
-                    image={post.user_id.photo}
-                    link={`/users/${post.user_id._id}`}
+                    image={
+                      post?.user_id?.photo
+                        ? `data:Buffer;base64,${Buffer.from(
+                            post?.user_id?.photo?.data
+                          ).toString('base64')}`
+                        : ''
+                    }
+                    link={`/user/${post.user_id._id}`}
                     size="35"
                   />
                 </div>

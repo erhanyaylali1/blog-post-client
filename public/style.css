@@ -8,9 +8,26 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ant-segmented-item {
+  margin-bottom: 0 !important;
+}
+
 .ant-message-custom-content {
   display: flex !important;
   align-items: center !important;
+}
+
+.post-statics .ant-statistic-content {
+  cursor: pointer;
+  margin-top: 8px;
+}
+.post-statics svg {
+  margin-top: -10px;
+  margin-right: 5px;
+}
+
+.post-statics .ant-statistic-content:hover span {
+  color: rgb(33, 111, 219);
 }
 
 .other h2 {

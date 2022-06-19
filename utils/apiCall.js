@@ -269,3 +269,63 @@ export const increaseViewCount = (id) => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+
+// USER API
+
+export const getUser = (id) => {
+  return fetch(`${API}/user/${id}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getUserPosts = (id) => {
+  return fetch(`${API}/user/${id}/posts`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const getUserTrends = (id) => {
+  return fetch(`${API}/user/${id}/trends`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const updateUser = (id, body, token) => {
+  return fetch(`${API}/user/${id}`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body,
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+// OTHERS
+export const getCountries = () => {
+  return fetch(`https://restcountries.com/v3.1/all`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};

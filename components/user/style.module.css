@@ -1,0 +1,57 @@
+.carousel_item {
+  height: 250px;
+  color: #fff;
+  line-height: 160px;
+  text-align: center;
+  background: #364d79;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel_item_title {
+  font-size: 25px;
+  font-weight: bold;
+  line-height: 2rem;
+  cursor: pointer;
+}
+
+.carousel_item_content {
+  margin-top: 15px;
+  padding-inline: 30px;
+  font-size: 15px;
+  line-height: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  cursor: pointer;
+}
+
+.header_item_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.header_item_title {
+  font-size: 18px;
+  line-height: 2rem;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.header_item_text {
+  font-size: 16px;
+  line-height: 1.8rem;
+  font-weight: 400;
+}
+
+.header_item_edit_input {
+  width: 100%;
+}

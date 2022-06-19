@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { NAME } from '../../config/config';
 import { isAuth, signOut } from '../../utils/browserOperations';
 import { logoutFromServer } from '../../utils/apiCall';
-import UserRoles from '../../config/UserRoles';
 
 const Header = () => {
   const router = useRouter();
@@ -22,8 +21,9 @@ const Header = () => {
   };
 
   const navigateUser = () => {
-    if (user.role == UserRoles.User) router.push('/user');
-    else router.push('/admin');
+    if (isLogged) {
+      router.push(`/user/${user._id}`);
+    }
   };
 
   const navigateToLogin = () => router.push('/login');

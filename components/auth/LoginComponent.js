@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import styles from './auth.module.css';
 import { loginToServer } from '../../utils/apiCall';
 import { authenticate, isAuth } from '../../utils/browserOperations';
-import UserRoles from '../../config/UserRoles';
 import { message } from 'antd';
 
 const LoginComponent = () => {
@@ -24,9 +23,8 @@ const LoginComponent = () => {
     if (isLogged) navigateUser(user);
   }, []);
 
-  const navigateUser = (user) => {
-    if (user.role == UserRoles.User) router.push('/user');
-    else router.push('/admin');
+  const navigateUser = () => {
+    router.push('/');
   };
 
   // SUBMIT LOGIN FORM

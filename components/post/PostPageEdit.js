@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Button, Input, message, Select } from 'antd';
+import { Button, Input, message, Popconfirm, Select } from 'antd';
 import { deletePost, editPost, getCategories } from '../../utils/apiCall';
 import { getCookie, isAuth } from '../../utils/browserOperations';
 import Editor from '../../components/editor';
@@ -132,15 +132,13 @@ const PostPageEdit = ({ post, refreshPage }) => {
   };
 
   const handleDeletePost = () => {
-    if (window.confirm('Are you sure you want to delete this post?')) {
-      deletePost(post._id, token).then((response) => {
-        if (response.error) message.error(response.error, 1);
-        else {
-          message.success(response.message, 1);
-          router.push('/');
-        }
-      });
-    }
+    deletePost(post._id, token).then((response) => {
+      if (response.error) message.error(response.error, 1);
+      else {
+        message.success(response.message, 1);
+        router.push('/');
+      }
+    });
   };
 
   const cancel = () => router.reload(window.location.pathname);
@@ -166,18 +164,24 @@ const PostPageEdit = ({ post, refreshPage }) => {
             }`}>
             Edit
           </p>
-          <Button
-            type="text"
-            danger
-            className="ml-3 d-flex align-items-center"
-            icon={<DeleteOutlined />}>
-            <div
-              className="ml-2"
-              style={{ marginTop: '2px', fontSize: '15px' }}
-              onClick={handleDeletePost}>
-              Delete
-            </div>
-          </Button>
+          <Popconfirm
+            placement="topLeft"
+            title={'Are you sure you want to delete this post?'}
+            onConfirm={handleDeletePost}
+            okText="Yes"
+            cancelText="No">
+            <Button
+              type="text"
+              danger
+              className="ml-3 d-flex align-items-center"
+              icon={<DeleteOutlined />}>
+              <div
+                className="ml-2"
+                style={{ marginTop: '2px', fontSize: '15px' }}>
+                Delete
+              </div>
+            </Button>
+          </Popconfirm>
         </div>
         {mode === 'View' ? (
           <PostPageView post={post} refreshPage={refreshPage} />
@@ -253,14 +257,16 @@ const PostPageEdit = ({ post, refreshPage }) => {
               </div>
               <div className="row m-0 p-0 w-100 mt-3 mb-5">
                 <div className="col-2 ml-auto">
-                  <Button
-                    danger
-                    type="text"
-                    size="large"
-                    block
-                    onClick={cancel}>
-                    Cancel
-                  </Button>
+                  <Popconfirm
+                    placement="topLeft"
+                    title={'Are you sure you want to cancel?'}
+                    onConfirm={cancel}
+                    okText="Yes"
+                    cancelText="No">
+                    <Button danger type="text" size="large" block>
+                      Cancel
+                    </Button>
+                  </Popconfirm>
                 </div>
                 <div className="col-2 ml-2">
                   <Button
