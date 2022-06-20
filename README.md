@@ -15,6 +15,9 @@ Features
 - Like to Post
 - Comment to Post
 - View Count
+- Reset Password (Send Reset link via email)
+- Update User
+- Admin Dashboard (Manager Users and Categories)
 
 Technologies
 --------------------------------
