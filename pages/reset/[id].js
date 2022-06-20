@@ -7,7 +7,7 @@ import { checkPasswordResetLink, resetPassword } from '../../utils/apiCall';
 
 const ResetPassword = () => {
   const router = useRouter();
-  const { token: id } = router.query;
+  const { id } = router.query;
 
   const {
     register,
