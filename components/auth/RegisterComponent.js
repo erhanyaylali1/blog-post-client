@@ -59,7 +59,7 @@ const RegisterComponent = () => {
         className={styles.form}
         autoComplete="off">
         <div className="form-group">
-          <label className="form-label">Name</label>
+          <label className="form-label">Full Name</label>
           <input
             className="form-control"
             {...register('name', { required: true, maxLength: 20 })}

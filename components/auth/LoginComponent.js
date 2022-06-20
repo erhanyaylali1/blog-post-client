@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import styles from './auth.module.css';
 import { loginToServer } from '../../utils/apiCall';
 import { authenticate, isAuth } from '../../utils/browserOperations';
 import { message } from 'antd';
+import Modal from '@mui/material/Modal';
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 const LoginComponent = () => {
   const {
@@ -15,6 +17,7 @@ const LoginComponent = () => {
   } = useForm();
 
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
 
   // IF USER ALREADY LOGGED IN, THEN REDIRECT TO THE HOME PAGE
   useEffect(() => {
@@ -46,6 +49,9 @@ const LoginComponent = () => {
       }
     });
   };
+
+  const closeModal = () => setShowModal(false);
+  const openModal = () => setShowModal(true);
 
   return (
     <div>
@@ -83,8 +89,18 @@ const LoginComponent = () => {
           <button type="submit" className="btn btn-primary">
             Login
           </button>
+          <div className="btn btn-link ml-4" onClick={openModal}>
+            Forgot your password?
+          </div>
         </div>
       </form>
+      <Modal
+        open={showModal}
+        onClose={closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <ForgotPasswordModal onClose={closeModal} />
+      </Modal>
     </div>
   );
 };

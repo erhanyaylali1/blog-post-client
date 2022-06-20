@@ -69,7 +69,11 @@ const Post = () => {
     }
     if (!post) return null;
     return isSessionUserAuthorOfPost() ? (
-      <PostPageEdit post={post} refreshPage={refreshPage} />
+      <PostPageEdit
+        post={post}
+        refreshPage={refreshPage}
+        isAdmin={user.role === UserRoles.Admin}
+      />
     ) : (
       <PostPageView post={post} refreshPage={refreshPage} />
     );

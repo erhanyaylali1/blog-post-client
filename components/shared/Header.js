@@ -50,7 +50,7 @@ const Header = () => {
           {isLogged ? (
             <>
               <NavItem style={navItemStyle} onClick={navigateUser}>
-                <NavLink>Dashboard</NavLink>
+                <NavLink>Profile</NavLink>
               </NavItem>
               {isAdmin ? (
                 <NavItem style={navItemStyle} onClick={navigateToAdmin}>

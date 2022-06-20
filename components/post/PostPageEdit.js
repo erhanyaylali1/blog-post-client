@@ -11,7 +11,7 @@ import Switch from '@mui/material/Switch';
 import styles from './style.module.css';
 import { DeleteOutlined } from '@ant-design/icons';
 
-const PostPageEdit = ({ post, refreshPage }) => {
+const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
   const router = useRouter();
   const user = isAuth();
   const token = getCookie('token');
@@ -53,7 +53,7 @@ const PostPageEdit = ({ post, refreshPage }) => {
       formData.set('categories', selectedCategories);
     if (post.tags !== selectedTags) formData.set('tags', selectedTags);
     if (image?.length > 0) formData.set('photo', image[0]);
-    ('');
+
     editPost(post._id, formData, token).then((response) => {
       if (response.error) {
         message.error(response.error);
@@ -148,22 +148,26 @@ const PostPageEdit = ({ post, refreshPage }) => {
     return (
       <div className="w-100">
         <div className="row d-flex align-items-center justify-content-end w-100 mb-4">
-          <p
-            className={`m-0 mr-2 ${
-              mode === 'View' ? 'text-dark' : 'text-muted'
-            }`}>
-            View
-          </p>
-          <Switch
-            value={mode !== 'View'}
-            onChange={(e) => setMode(e.target.checked ? 'Edit' : 'View')}
-          />
-          <p
-            className={`m-0 mr-2 ${
-              mode === 'Edit' ? 'text-dark' : 'text-muted'
-            }`}>
-            Edit
-          </p>
+          {isAdmin && user._id === post.user_id._id ? (
+            <React.Fragment>
+              <p
+                className={`m-0 mr-2 ${
+                  mode === 'View' ? 'text-dark' : 'text-muted'
+                }`}>
+                View
+              </p>
+              <Switch
+                value={mode !== 'View'}
+                onChange={(e) => setMode(e.target.checked ? 'Edit' : 'View')}
+              />
+              <p
+                className={`m-0 mr-2 ${
+                  mode === 'Edit' ? 'text-dark' : 'text-muted'
+                }`}>
+                Edit
+              </p>
+            </React.Fragment>
+          ) : null}
           <Popconfirm
             placement="topLeft"
             title={'Are you sure you want to delete this post?'}

@@ -153,7 +153,6 @@ const UserList = () => {
       key: 'createdAt',
       render: (text) => <div>{moment(text).format('MMM Do, YYYY')}</div>,
     },
-    ,
     {
       title: 'Delete',
       key: 'delete',

@@ -377,6 +377,57 @@ export const deleteUser = (id, token) => {
     .catch((error) => console.log(error));
 };
 
+export const updateAccount = (id, body, token) => {
+  return fetch(`${API}/user/${id}/account`, {
+    method: 'PUT',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const sendResetLink = (email) => {
+  return fetch(`${API}/user/send-reset-password-link`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email }),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const checkPasswordResetLink = (id) => {
+  return fetch(`${API}/user/check-reset-password/${id}`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const resetPassword = (body) => {
+  return fetch(`${API}/user/reset-password`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
 // OTHERS
 export const getCountries = () => {
   return fetch(`https://restcountries.com/v3.1/all`, {

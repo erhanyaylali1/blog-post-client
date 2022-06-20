@@ -14,10 +14,11 @@ import moment from 'moment';
 import { updateUser } from '../../utils/apiCall';
 import styles from './style.module.css';
 import UserProfileHeaderView from './UserProfileHeaderView';
-import { FormOutlined } from '@ant-design/icons';
+import { FormOutlined, SettingOutlined } from '@ant-design/icons';
 import UploadImage from '../shared/UploadImage';
 import { getCookie } from '../../utils/browserOperations';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -97,6 +98,15 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
           }`}>
           Edit
         </p>
+        <Tooltip title="Account Settings">
+          <Link href="/settings">
+            <Button
+              className="ml-3"
+              type="link"
+              icon={<SettingOutlined size="large" />}
+            />
+          </Link>
+        </Tooltip>
       </div>
       {mode === 'View' ? (
         <UserProfileHeaderView user={user} countries={countries} />
