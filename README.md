@@ -1,7 +1,5 @@
 # Blog-Post
 
-#### Live: http://blog-post.s3-website.us-east-2.amazonaws.com/
-
 DESCRIPTION
 --------------------------------
 - A blog with rich text editor
