@@ -15,30 +15,45 @@ const EditorStatePlugin = ({ value }) => {
     editor.update(() => {
       const parser = new DOMParser();
       const dom = parser.parseFromString(value, 'text/html');
-      const elements = dom.querySelectorAll('body > :not(.editor-paragraph)');
 
-      elements.forEach((el) => el.remove());
+      const elements = dom.querySelectorAll(
+        'body > :not(:not(span).editor-paragraph,.editor-image)'
+      );
 
-      const image = dom.querySelector('.imported-image');
-      const src = image.firstElementChild.getAttribute('src');
-      const alt = image.firstElementChild.getAttribute('alt');
+      elements?.forEach((el) => el.remove());
 
+      const images = [];
+
+      const bodyChilds = dom.querySelector('body').childNodes;
+
+      const indexes = [];
+      bodyChilds.forEach((child, index) => {
+        if (
+          child.classList.contains('editor-image') ||
+          child.classList.contains('imported-image')
+        ) {
+          images.push(child);
+          indexes.push(index);
+          child.remove();
+        }
+      });
       const nodes = $generateNodesFromDOM(editor, dom);
-
-      const index = nodes.findIndex((node) => node.__type === 'linebreak');
-      const imageNode = $createImageNode({ src, alt });
-
-      nodes.splice(index, 1);
-      const key = nodes[index - 1].__key;
-      console.log(nodes, nodes.length);
-      console.log(key);
 
       const root = $getRoot();
       root.select();
       const selection = $getSelection();
       selection.insertNodes(nodes);
 
-      root.getChildAtIndex(index - 1).insertAfter(imageNode);
+      if (images.length) {
+        images.forEach((image, index) => {
+          console.log(image);
+          const src = image.getElementsByTagName('img')[0].getAttribute('src');
+          const alt = image.getElementsByTagName('img')[0].getAttribute('alt');
+          const imageNode = $createImageNode({ src, alt });
+          console.log(imageNode);
+          root.getChildAtIndex(indexes[index] - 1).insertAfter(imageNode);
+        });
+      }
     });
   };
 

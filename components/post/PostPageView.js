@@ -25,6 +25,8 @@ const PostPageView = ({ post, refreshPage }) => {
   const [newComment, setNewComment] = useState('');
   const [newCommentLoading, setNewCommentLoading] = useState(false);
 
+  console.log(user);
+
   const renderCategories = () => {
     return post?.categories?.map((category) => {
       return (
@@ -147,7 +149,13 @@ const PostPageView = ({ post, refreshPage }) => {
                     avatar={
                       <Avatar
                         name={item.user_id.full_name}
-                        image={item.user_id?.photo}
+                        image={
+                          item?.user_id?.photo
+                            ? `data:Buffer;base64,${Buffer.from(
+                                item?.user_id?.photo?.data
+                              ).toString('base64')}`
+                            : ''
+                        }
                         size="40"
                         link={`/user/${item.user_id._id}`}
                       />
@@ -164,7 +172,13 @@ const PostPageView = ({ post, refreshPage }) => {
               avatar={
                 <Avatar
                   name={user.full_name}
-                  image={user?.photo}
+                  image={
+                    user?.photo
+                      ? `data:Buffer;base64,${Buffer.from(
+                          user?.photo?.data
+                        ).toString('base64')}`
+                      : ''
+                  }
                   size="40"
                   link={`/user/${user._id}`}
                 />
