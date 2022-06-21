@@ -3,7 +3,7 @@ module.exports = {
     APP_NAME: 'BLOG',
     // API_URL: 'http://localhost:8080',
     API_URL:
-      'http://blogpost-env-1.eba-prgmrppq.us-east-2.elasticbeanstalk.com',
+      'http://richblogpost-env-1.eba-nfiysyxm.eu-central-1.elasticbeanstalk.com',
     PRODUCTION: false,
   },
 };
