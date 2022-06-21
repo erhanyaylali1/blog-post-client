@@ -31,7 +31,8 @@
     "react-hook-form": "^7.25.3",
     "reactstrap": "^9.0.1",
     "string-strip-html": "^9.1.12",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "yjs": "^13.5.39"
   },
   "devDependencies": {
     "prettier": "^2.6.2"

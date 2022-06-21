@@ -1,5 +1,8 @@
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { useLexicalNodeSelection } from '@lexical/react/useLexicalNodeSelection';
+import { LexicalNestedComposer } from '@lexical/react/LexicalNestedComposer';
 import { mergeRegister } from '@lexical/utils';
 import {
   $getNodeByKey,
@@ -14,6 +17,8 @@ import {
 } from 'lexical';
 import * as React from 'react';
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import Placeholder from '../ui/Placeholder';
+import ImageResizer from '../ui/ImageResizer';
 
 const imageCache = new Set();
 
@@ -57,6 +62,7 @@ function LazyImage({
 }
 
 function ImageComponent({
+  style,
   src,
   altText,
   nodeKey,
@@ -136,13 +142,40 @@ function ImageComponent({
     setSelected,
   ]);
 
+  const setShowCaption = () => {
+    editor.update(() => {
+      const node = $getNodeByKey(nodeKey);
+      if ($isImageNode(node)) {
+        node.setShowCaption(true);
+      }
+    });
+  };
+
+  const onResizeEnd = (nextWidth, nextHeight) => {
+    // Delay hiding the resize bars for click case
+    setTimeout(() => {
+      setIsResizing(false);
+    }, 200);
+
+    editor.update(() => {
+      const node = $getNodeByKey(nodeKey);
+      if ($isImageNode(node)) {
+        node.setWidthAndHeight(nextWidth, nextHeight);
+      }
+    });
+  };
+
+  const onResizeStart = () => {
+    setIsResizing(true);
+  };
+
   const draggable = isSelected && $isNodeSelection(selection);
   const isFocused = $isNodeSelection(selection) && (isSelected || isResizing);
 
   return (
     <Suspense fallback={null}>
       <>
-        <div draggable={draggable}>
+        <div draggable={draggable} style={style}>
           <LazyImage
             className={isFocused ? 'focused' : null}
             src={src}
@@ -152,7 +185,35 @@ function ImageComponent({
             height={height}
             maxWidth={maxWidth}
           />
+          {resizable && isFocused && (
+            <ImageResizer
+              showCaption={showCaption}
+              setShowCaption={setShowCaption}
+              editor={editor}
+              imageRef={ref}
+              maxWidth={maxWidth}
+              onResizeStart={onResizeStart}
+              onResizeEnd={onResizeEnd}
+            />
+          )}
         </div>
+        {showCaption && (
+          <div className="image-caption-container">
+            <LexicalNestedComposer initialEditor={caption}>
+              <RichTextPlugin
+                contentEditable={
+                  <ContentEditable className="ImageNode__contentEditable" />
+                }
+                placeholder={
+                  <Placeholder className="ImageNode__placeholder">
+                    Enter a caption...
+                  </Placeholder>
+                }
+                initialEditorState={null}
+              />
+            </LexicalNestedComposer>
+          </div>
+        )}
       </>
     </Suspense>
   );
@@ -239,8 +300,8 @@ export class ImageNode extends DecoratorNode {
 
   setWidthAndHeight() {
     const writable = this.getWritable();
-    writable.__width = width;
-    writable.__height = height;
+    writable.__width = this.width;
+    writable.__height = this.height;
   }
 
   setShowCaption(showCaption) {
@@ -275,6 +336,7 @@ export class ImageNode extends DecoratorNode {
   decorate() {
     return (
       <ImageComponent
+        style={{ width: 'max-content', position: 'relative' }}
         src={this.__src}
         altText={this.__altText}
         width={this.__width}
@@ -292,7 +354,7 @@ export class ImageNode extends DecoratorNode {
 export function $createImageNode({
   altText,
   height,
-  maxWidth = 500,
+  maxWidth = 700,
   src,
   width,
   showCaption,

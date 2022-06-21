@@ -42,6 +42,9 @@ import {
 import { INSERT_IMAGE_COMMAND } from './ImagePlugin';
 import Modal from '@mui/material/Modal';
 import { Box } from '@mui/material';
+import { Button, Input } from 'antd';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import UploadImage from '../../shared/UploadImage';
 
 const LowPriority = 1;
 
@@ -547,45 +550,137 @@ export default function ToolbarPlugin() {
     transform: 'translate(-50%, -50%)',
     width: 500,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
+    borderRadius: 1,
     p: 4,
   };
 
   const renderModal = () => {
+    const [mode, setMode] = useState(null);
+
+    const onClick = (payload) => {
+      editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+      setShowModal(false);
+      goBack();
+    };
+
+    const goBack = () => setMode(null);
+
+    return (
+      <div className="d-flex flex-column">
+        <div
+          style={{
+            marginBottom: '30px',
+            display: 'flex',
+            alignItems: 'center',
+          }}>
+          {mode ? (
+            <div className="mr-2">
+              <Button
+                type="link"
+                icon={<ArrowLeftOutlined />}
+                onClick={goBack}
+              />
+            </div>
+          ) : null}
+          <div style={{ fontSize: '1.8rem', marginBottom: '2px' }}>
+            Insert Image
+          </div>
+        </div>
+        {!mode && (
+          <div className="d-flex flex-column">
+            <Button
+              className="mb-3"
+              data-test-id="image-modal-option-url"
+              onClick={() => setMode('url')}>
+              URL
+            </Button>
+            <Button
+              data-test-id="image-modal-option-file"
+              onClick={() => setMode('file')}>
+              File
+            </Button>
+          </div>
+        )}
+        {mode === 'url' && <InsertImageUriDialogBody onClick={onClick} />}
+        {mode === 'file' && <InsertImageUploadedDialogBody onClick={onClick} />}
+      </div>
+    );
+  };
+
+  const InsertImageUriDialogBody = ({ onClick }) => {
     const [src, setSrc] = useState('');
     const [altText, setAltText] = useState('');
 
     const isDisabled = src === '';
 
-    const onClick = (payload) => {
-      editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
-      setShowModal(false);
-    };
-
     return (
       <>
-        <input
+        <Input
           label="URL"
-          placeholder="Descriptive alternative text"
+          placeholder="Image Url"
           onChange={(e) => setSrc(e.target.value)}
           value={src}
           data-test-id="image-modal-alt-text-input"
         />
-        <input
+        <Input
+          className="mt-3 mb-4"
           label="Alt Text"
-          placeholder="Descriptive alternative text"
+          placeholder="Alternative Text"
           onChange={(e) => setAltText(e.target.value)}
           value={altText}
           data-test-id="image-modal-alt-text-input"
         />
-        <div className="ToolbarPlugin__dialogActions">
-          <button
-            data-test-id="image-modal-file-upload-btn"
+        <div className="d-flex justify-content-end">
+          <Button
+            type="primary"
             disabled={isDisabled}
             onClick={() => onClick({ altText, src })}>
             Confirm
-          </button>
+          </Button>
+        </div>
+      </>
+    );
+  };
+
+  const InsertImageUploadedDialogBody = ({ onClick }) => {
+    const [image, setImage] = useState(null);
+    const [src, setSrc] = useState('');
+    const [altText, setAltText] = useState('');
+
+    const isDisabled = src === '';
+
+    const loadImage = (files) => {
+      const reader = new FileReader();
+      reader.onload = function () {
+        if (typeof reader.result === 'string') {
+          setSrc(reader.result);
+        }
+        return '';
+      };
+      reader.readAsDataURL(files[0]);
+    };
+
+    if (image) loadImage(image);
+
+    return (
+      <>
+        <UploadImage image={image} setImage={setImage} />
+        <Input
+          className="mt-3 mb-4"
+          label="Alt Text"
+          placeholder="Alternative Text"
+          onChange={(e) => setAltText(e.target.value)}
+          value={altText}
+          data-test-id="image-modal-alt-text-input"
+        />
+        <div className="d-flex justify-content-end">
+          <Button
+            type="primary"
+            disabled={isDisabled}
+            onClick={() => onClick({ altText, src })}>
+            Confirm
+          </Button>
         </div>
       </>
     );
