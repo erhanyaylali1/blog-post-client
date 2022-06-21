@@ -63,7 +63,7 @@ Technologies
 --------------
 
 ### View Post Page
-![image](https://user-images.githubusercontent.com/32177766/174304295-09e75ee5-b6a4-4176-a2b9-61bb77ea9a1c.png)
+![image](https://user-images.githubusercontent.com/32177766/174835430-373f1d55-52fd-48cf-96fb-082ea9dff2b9.png)
 
 --------------
 
