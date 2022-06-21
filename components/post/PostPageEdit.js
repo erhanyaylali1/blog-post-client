@@ -148,7 +148,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
     return (
       <div className="w-100">
         <div className="row d-flex align-items-center justify-content-end w-100 mb-4">
-          {isAdmin && user._id === post.user_id._id ? (
+          {isAdmin || user._id === post.user_id._id ? (
             <React.Fragment>
               <p
                 className={`m-0 mr-2 ${

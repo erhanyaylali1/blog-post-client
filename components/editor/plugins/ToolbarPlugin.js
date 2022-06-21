@@ -13,6 +13,10 @@ import {
   $createParagraphNode,
   $getNodeByKey,
 } from 'lexical';
+import {
+  $patchStyleText,
+  $getSelectionStyleValueForProperty,
+} from '@lexical/selection';
 import { $isLinkNode, TOGGLE_LINK_COMMAND } from '@lexical/link';
 import {
   $isParentElementRTL,
@@ -230,19 +234,6 @@ function FloatingLinkEditor({ editor }) {
   );
 }
 
-function Select({ onChange, className, options, value }) {
-  return (
-    <select className={className} onChange={onChange} value={value}>
-      <option hidden={true} value="" />
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-  );
-}
-
 function getSelectedNode(selection) {
   const anchor = selection.anchor;
   const focus = selection.focus;
@@ -428,6 +419,8 @@ export default function ToolbarPlugin() {
   const [canUndo, setCanUndo] = useState(false);
   const [canRedo, setCanRedo] = useState(false);
   const [blockType, setBlockType] = useState('paragraph');
+  const [fontFamily, setFontFamily] = useState('Arial');
+  const [fontSize, setFontSize] = useState('Arial');
   const [selectedElementKey, setSelectedElementKey] = useState(null);
   const [showBlockOptionsDropDown, setShowBlockOptionsDropDown] =
     useState(false);
@@ -475,6 +468,13 @@ export default function ToolbarPlugin() {
       setIsCode(selection.hasFormat('code'));
       setIsRTL($isParentElementRTL(selection));
 
+      setFontSize(
+        $getSelectionStyleValueForProperty(selection, 'font-size', '15px')
+      );
+      setFontFamily(
+        $getSelectionStyleValueForProperty(selection, 'font-family', 'Arial')
+      );
+
       // Update links
       const node = getSelectedNode(selection);
       const parent = node.getParent();
@@ -485,6 +485,32 @@ export default function ToolbarPlugin() {
       }
     }
   }, [editor]);
+
+  const applyStyleText = useCallback(
+    (styles) => {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $patchStyleText(selection, styles);
+        }
+      });
+    },
+    [editor]
+  );
+
+  const onFontFamilySelect = useCallback(
+    (e) => {
+      applyStyleText({ 'font-family': e.target.value });
+    },
+    [applyStyleText]
+  );
+
+  const onFontSizeSelect = useCallback(
+    (e) => {
+      applyStyleText({ 'font-size': e.target.value });
+    },
+    [applyStyleText]
+  );
 
   useEffect(() => {
     return mergeRegister(
@@ -686,6 +712,22 @@ export default function ToolbarPlugin() {
     );
   };
 
+  const Select = ({ onChange, className, options, value }) => {
+    return (
+      <select
+        className={className}
+        onChange={onChange}
+        value={value}
+        style={{ width: '90px' }}>
+        {options.map(([option, text]) => (
+          <option key={option} value={option}>
+            {text}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
   return (
     <div className="toolbar" ref={toolbarRef}>
       <button
@@ -744,6 +786,43 @@ export default function ToolbarPlugin() {
         </>
       ) : (
         <>
+          <>
+            <Select
+              className="toolbar-item font-family"
+              onChange={onFontFamilySelect}
+              options={[
+                ['Arial', 'Arial'],
+                ['Courier New', 'Courier New'],
+                ['Georgia', 'Georgia'],
+                ['Times New Roman', 'Times New Roman'],
+                ['Trebuchet MS', 'Trebuchet MS'],
+                ['Verdana', 'Verdana'],
+              ]}
+              value={fontFamily}
+            />
+            <i className="chevron-down inside" />
+          </>
+          <>
+            <Select
+              className="toolbar-item font-size"
+              onChange={onFontSizeSelect}
+              options={[
+                ['10px', '10px'],
+                ['11px', '11px'],
+                ['12px', '12px'],
+                ['13px', '13px'],
+                ['14px', '14px'],
+                ['15px', '15px'],
+                ['16px', '16px'],
+                ['17px', '17px'],
+                ['18px', '18px'],
+                ['19px', '19px'],
+                ['20px', '20px'],
+              ]}
+              value={fontSize}
+            />
+            <i className="chevron-down inside" />
+          </>
           <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');

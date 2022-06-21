@@ -175,7 +175,7 @@ function ImageComponent({
   return (
     <Suspense fallback={null}>
       <>
-        <div draggable={draggable} style={style}>
+        <div draggable={draggable} style={style} className="editor-paragraph">
           <LazyImage
             className={isFocused ? 'focused' : null}
             src={src}
