@@ -39,6 +39,9 @@ import {
   getDefaultCodeLanguage,
   getCodeLanguages,
 } from '@lexical/code';
+import { INSERT_IMAGE_COMMAND } from './ImagePlugin';
+import Modal from '@mui/material/Modal';
+import { Box } from '@mui/material';
 
 const LowPriority = 1;
 
@@ -433,6 +436,7 @@ export default function ToolbarPlugin() {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -535,6 +539,57 @@ export default function ToolbarPlugin() {
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
     }
   }, [editor, isLink]);
+
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  const renderModal = () => {
+    const [src, setSrc] = useState('');
+    const [altText, setAltText] = useState('');
+
+    const isDisabled = src === '';
+
+    const onClick = (payload) => {
+      editor.dispatchCommand(INSERT_IMAGE_COMMAND, payload);
+      setShowModal(false);
+    };
+
+    return (
+      <>
+        <input
+          label="URL"
+          placeholder="Descriptive alternative text"
+          onChange={(e) => setSrc(e.target.value)}
+          value={src}
+          data-test-id="image-modal-alt-text-input"
+        />
+        <input
+          label="Alt Text"
+          placeholder="Descriptive alternative text"
+          onChange={(e) => setAltText(e.target.value)}
+          value={altText}
+          data-test-id="image-modal-alt-text-input"
+        />
+        <div className="ToolbarPlugin__dialogActions">
+          <button
+            data-test-id="image-modal-file-upload-btn"
+            disabled={isDisabled}
+            onClick={() => onClick({ altText, src })}>
+            Confirm
+          </button>
+        </div>
+      </>
+    );
+  };
 
   return (
     <div className="toolbar" ref={toolbarRef}>
@@ -676,9 +731,24 @@ export default function ToolbarPlugin() {
             className="toolbar-item"
             aria-label="Justify Align">
             <i className="format justify-align" />
-          </button>{' '}
+          </button>
+          <button
+            onClick={() => {
+              setShowModal(true);
+            }}
+            className="toolbar-item"
+            aria-label="Justify Align">
+            <i className="format image" />
+          </button>
         </>
       )}
+      <Modal
+        open={showModal}
+        onClose={() => setShowModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box sx={style}>{renderModal()}</Box>
+      </Modal>
     </div>
   );
 }

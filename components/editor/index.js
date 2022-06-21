@@ -19,6 +19,8 @@ import CodeHighlightPlugin from './plugins/CodeHighlightPlugin';
 import AutoLinkPlugin from './plugins/AutoLinkPlugin';
 import React from 'react';
 import EditorStatePlugin from './plugins/EditorStatePlugin';
+import ImagesPlugin from './plugins/ImagePlugin';
+import { ImageNode } from './plugins/ImageNode';
 
 const Placeholder = () => {
   return <div className="editor-placeholder">Enter some text...</div>;
@@ -41,6 +43,7 @@ const editorConfig = {
     TableRowNode,
     AutoLinkNode,
     LinkNode,
+    ImageNode,
   ],
 };
 
@@ -60,6 +63,7 @@ const Editor = ({ content }) => {
           <CodeHighlightPlugin />
           <ListPlugin />
           <LinkPlugin />
+          <ImagesPlugin />
           <AutoLinkPlugin />
           <ListMaxIndentLevelPlugin maxDepth={7} />
           <MarkdownShortcutPlugin transformers={TRANSFORMERS} />

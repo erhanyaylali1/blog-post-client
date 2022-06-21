@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"./**/*.(js|css)\"",
-    "deploy": "aws s3 sync ./out s3://blog-post/"
+    "deploy": "aws s3 sync ./out s3://rich-blog-post/"
   },
   "dependencies": {
     "@emotion/css": "^11.9.0",
