@@ -2,8 +2,7 @@ module.exports = {
   publicRuntimeConfig: {
     APP_NAME: 'BLOG',
     // API_URL: 'http://localhost:8080',
-    API_URL:
-      'http://richblogpost-env-2.eba-nfiysyxm.eu-central-1.elasticbeanstalk.com',
+    API_URL: 'https://blogpost-354108.ey.r.appspot.com',
     PRODUCTION: false,
   },
 };
