@@ -4,6 +4,7 @@ DESCRIPTION
 --------------------------------
 - A blog with rich text editor
 - Live on: https://blog-post-client.vercel.app/
+- Swagger File for APIs: https://blogpost-354108.ey.r.appspot.com/swagger/
 
 Features
 --------------------------------
