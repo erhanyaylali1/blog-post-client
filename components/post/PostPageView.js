@@ -25,8 +25,6 @@ const PostPageView = ({ post, refreshPage }) => {
   const [newComment, setNewComment] = useState('');
   const [newCommentLoading, setNewCommentLoading] = useState(false);
 
-  console.log(user);
-
   const renderCategories = () => {
     return post?.categories?.map((category) => {
       return (
@@ -225,24 +223,24 @@ const PostPageView = ({ post, refreshPage }) => {
           />
         </div>
       )}
-      <div className="row d-flex align-items-center justify-align-content-sm-around mt-4 mb-3 px-5 w-100">
-        <div className="col d-flex align-items-center">
-          <div>
+      <div className="row d-flex align-items-center justify-align-content-sm-around mt-4 mb-3 px-1 p-md-5 w-100">
+        <div className={`col d-flex align-items-center ${styles.created_wrapper}`}>
+          <div className='d-flex align-items-center'>
             <Avatar
               name={post?.user_id?.full_name}
               image={post?.user_id?.photo}
               link={`/user/${post?.user_id?._id}`}
               size="40"
             />
+            <div className={styles.author}>{post?.user_id?.full_name}</div>
           </div>
-          <div className={styles.author}>{post?.user_id?.full_name}</div>
           <div className="row ml-4 text-muted mt-1">
             {post?.createdAt ? getRelativeTime(post.createdAt) : null}
           </div>
         </div>
-        <div className="col">
+        <div className="w-100">
           <div className="row d-flex align-items-center">
-            <div className="d-flex flex-row justify-content-end w-100 align-items-center">
+            <div className={`d-flex flex-row ${styles.like_action_wrapper} mt-3 w-100 align-items-center`}>
               <Tooltip title="Like" className="d-flex align-items-center mr-3">
                 <Button
                   icon={
@@ -296,11 +294,11 @@ const PostPageView = ({ post, refreshPage }) => {
         <div className="d-flex flex-column w-100 mb-3">
           <div className="d-flex flex-column">
             <div className={styles.post_categories_header}>Categories</div>
-            <div className="d-flex flex-row">{renderCategories()}</div>
+            <div className="d-flex flex-row mw-100 overflow-auto">{renderCategories()}</div>
           </div>
           <div className="mt-4 d-flex flex-column">
             <div className={styles.post_categories_header}>Tags</div>
-            <div className="d-flex flex-row">{renderTags()}</div>
+            <div className="d-flex flex-row mw-100 overflow-auto">{renderTags()}</div>
           </div>
         </div>
         <div className="d-flex flex-column w-100 mb-3">{renderComments()}</div>

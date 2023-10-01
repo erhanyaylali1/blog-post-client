@@ -729,7 +729,7 @@ export default function ToolbarPlugin() {
   };
 
   return (
-    <div className="toolbar" ref={toolbarRef}>
+    <div className="toolbar" ref={toolbarRef} style={{ flexWrap: 'wrap' }}>
       <button
         disabled={!canUndo}
         onClick={() => {
@@ -918,6 +918,7 @@ export default function ToolbarPlugin() {
       )}
       <Modal
         open={showModal}
+        className="post-edit-modal"
         onClose={() => setShowModal(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description">

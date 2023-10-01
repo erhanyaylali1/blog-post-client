@@ -5,12 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>Blog Post</title>
           <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
@@ -20,7 +15,7 @@ class MyDocument extends Document {
             href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           />
           <meta
-            http-equiv="Content-Security-Policy"
+            httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
           />
         </Head>

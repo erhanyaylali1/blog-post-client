@@ -18,7 +18,7 @@ const HomePagePostCard = ({ post }) => {
     <Card className="mb-5 w-100">
       <div className="row m-0 p-0">
         {post?.photo && (
-          <div className="col-4 p-0" style={{ height: '200px' }}>
+          <div className={`col-md-4 p-0 col-xs-12 ${styles.home_card_image}`}>
             <CardMedia
               component="img"
               sx={{ height: '100%', width: '100%' }}
@@ -32,8 +32,7 @@ const HomePagePostCard = ({ post }) => {
           </div>
         )}
         <div
-          className={`${post?.photo ? 'col-8' : 'col-12'} pl-3`}
-          style={{ height: '200px' }}>
+          className={`${post?.photo ? 'col-md-8' : 'col-md-12'} col-xs-12 pl-3`}>
           <CardContent
             style={{ paddingBottom: '10px' }}
             className="h-100 d-flex flex-column">
@@ -49,8 +48,8 @@ const HomePagePostCard = ({ post }) => {
               onClick={navigateToPost}>
               {stripHtml(post.content).result}
             </p>
-            <div className="row ml-2 mb-0 mt-auto">
-              <div className="row d-flex align-items-center w-100">
+            <div className={styles.author_wrapper}>
+              <div className="d-flex align-items-center w-100">
                 <div style={{ cursor: 'pointer' }} onClick={navigateToAuthor}>
                   <Avatar
                     name={post.user_id.full_name}

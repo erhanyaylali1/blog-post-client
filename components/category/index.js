@@ -103,18 +103,18 @@ const Category = () => {
   return (
     <React.Fragment>
       <div className="column">
-        <div className="row pr-5">
+        <div className="row pr-md-5">
           <h4 className="ml-3">Categories</h4>
-          <div className="row ml-auto d-flex align-items-center pr-5">
+          <div className="row ml-auto d-flex align-items-center pr-md-5">
             <button
-              className="btn btn-link mr-3"
+              className="btn btn-link mr-md-3"
               onClick={openCreateCategoryModal}>
-              Create New Category
+              Create
             </button>
           </div>
         </div>
-        <div className="row mt-4 pr-5">
-          <div className="col mx-0 px-0 pr-5">
+        <div className="row mt-4 pr-md-5">
+          <div className="col mx-0 px-0 pr-md-5">
             <ul className={`list-group ${styles.categories_container}`}>
               {renderCategories()}
             </ul>

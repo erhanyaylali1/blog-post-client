@@ -66,17 +66,19 @@ const UserTabs = ({ user }) => {
 
   return (
     <React.Fragment>
-      <div className="mt-3 d-flex justify-content-center">
-        <div className="w-50">
+      <div className="mt-3 d-flex justify-content-center row">
+       <div className='col-0 col-md-3'></div>
+       <div className='col-12 col-md-6'>
           <Segmented
             options={['Posts', 'Likes', 'Comments']}
             block
             value={value}
             onChange={setValue}
           />
-        </div>
+       </div>
+       <div className='col-0 col-md-3'></div>
       </div>
-      <div className="py-2 px-5 mt-5">{renderTabs()}</div>
+      <div className="py-0 py-md-2 px-0 px-md-5 mt-5">{renderTabs()}</div>
     </React.Fragment>
   );
 };

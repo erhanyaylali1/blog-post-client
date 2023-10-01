@@ -836,3 +836,7 @@ i.image {
   left: -6px;
   cursor: nw-resize;
 }
+
+.post-edit-modal .MuiBox-root {
+  width: 80vw !important;
+}

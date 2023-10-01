@@ -113,8 +113,8 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
       ) : (
         <div className="card py-2">
           <div className="card-body">
-            <div className="row px-5">
-              <div className="mr-4 d-flex">
+            <div className="row px-md-5">
+              <div className="col-4 col-md-1 d-flex align-items-center">
                 <Avatar
                   name={user?.user?.full_name}
                   image={imageSource()}
@@ -127,12 +127,12 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
                     no_text={true}
                     setImage={setImage}
                     shape="circle"
-                    icon={<FormOutlined />}
+                    icon={<FormOutlined  width={10} height={10} />}
                   />
                 </Tooltip>
               </div>
-              <div className="ml-1 mt-2">
-                <h5 className="display-4" style={{ fontSize: '3rem' }}>
+              <div className="col-8 col-md-11 d-flex align-items-center">
+                <h5 className={`display-4 ${styles.username} mb-0`}>
                   {user?.user?.full_name}
                 </h5>
               </div>
@@ -150,8 +150,8 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
               </div>
               <div className="col-12 mt-3">
                 <div className="row pl-3">
-                  <div className="col-4 p-0">
-                    <div className={styles.header_item_container}>
+                <div className="col-xs-12 col-md-4 p-0">
+                  <div className={`${styles.header_item_container} d-flex`}>
                       <div className={styles.header_item_title}>
                         Member Since
                       </div>
@@ -160,8 +160,8 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-4 p-0 pr-4">
-                    <div className={styles.header_item_container}>
+                  <div className="col-xs-12 col-md-8 p-0 mt-3 mt-md-0">
+                    <div className={`${styles.header_item_container} d-flex`}>
                       <div className={styles.header_item_title}>Website</div>
                       <Input
                         className={styles.header_item_edit_input}
@@ -170,8 +170,8 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
                       />
                     </div>
                   </div>
-                  <div className="col-4 p-0 pr-4">
-                    <div className={styles.header_item_container}>
+                  <div className="col-xs-12 col-md-4 p-0 mt-3 pr-md-3">
+                    <div className={`${styles.header_item_container} d-flex`}>
                       <div className={styles.header_item_title}>Country</div>
                       <Select
                         showSearch
@@ -195,8 +195,8 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
                       </Select>
                     </div>
                   </div>
-                  <div className="col-4 p-0 mt-3 pr-4">
-                    <div className={styles.header_item_container}>
+                  <div className="col-xs-12 col-md-4 p-0 mt-3 pr-md-3">
+                    <div className={`${styles.header_item_container} d-flex`}>
                       <div className={styles.header_item_title}>Job</div>
                       <Input
                         value={job}
@@ -205,8 +205,8 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
                       />
                     </div>
                   </div>
-                  <div className="col-4 p-0 mt-3 pr-4">
-                    <div className={styles.header_item_container}>
+                  <div className="col-xs-12 col-md-4 p-0 mt-3 pr-md-3">
+                    <div className={`${styles.header_item_container} d-flex`}>
                       <div className={styles.header_item_title}>Birthday</div>
                       <DatePicker
                         format={'DD/MM/YYYY'}
@@ -218,7 +218,7 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
                       />
                     </div>
                   </div>
-                  <div className="col-4 mt-3 d-flex align-items-end justify-content-center">
+                  <div className="col-12 col-md-4 mt-3 d-flex align-items-end justify-content-center">
                     <div className="row w-100">
                       <div className="col-6">
                         <Popconfirm

@@ -237,7 +237,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
               </div>
               <div className="row m-0 my-2 w-100 d-flex flex-column">
                 <p>Tags</p>
-                <div className="w-25 d-flex">
+                <div className="w-100 d-flex">
                   <Input
                     value={newTag}
                     onChange={(e) => setNewTag(e.target.value)}
@@ -245,6 +245,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
                     style={{
                       borderTopRightRadius: '0',
                       borderBottomRightRadius: '0',
+                      width: '100%'
                     }}
                   />
                   <Button
@@ -260,7 +261,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
                 <div className="row m-0 w-100 flex mt-3">{renderTags()}</div>
               </div>
               <div className="row m-0 p-0 w-100 mt-3 mb-5">
-                <div className="col-2 ml-auto">
+                <div className="col-4 col-md-2 ml-auto">
                   <Popconfirm
                     placement="topLeft"
                     title={'Are you sure you want to cancel?'}
@@ -272,7 +273,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
                     </Button>
                   </Popconfirm>
                 </div>
-                <div className="col-2 ml-2">
+                <div className="col-4 col-md-2 ml-2">
                   <Button
                     type="primary"
                     size="large"

@@ -21,8 +21,8 @@ const Home = () => {
   const fetchPosts = () => {
     setLoading(true);
     getPosts().then((response) => {
-      if (response.error) message.error(message.error, 1);
-      else setPosts(response.posts);
+      if (response && response.error) message.error(message.error, 1);
+      else setPosts(response && response.posts);
       setLoading(false);
     });
   };
@@ -48,7 +48,7 @@ const Home = () => {
           <CircularProgress />
         </div>
       );
-    if (posts.length > 0) {
+    if (posts && posts.length > 0) {
       return posts.map((post) => (
         <HomePagePostCard post={post} key={post._id} />
       ));
@@ -68,7 +68,7 @@ const Home = () => {
           <div className="col-lg-3 col-sm-1" />
           <div className="col-lg-6 col-sm-10">
             {renderCreatePostButton()}
-            <div className="row mt-5">{renderPosts()}</div>
+            <div className="mt-5">{renderPosts()}</div>
           </div>
           <div className="col-lg-3 col-sm-1" />
         </div>

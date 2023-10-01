@@ -12,10 +12,10 @@ const CategoriesTags = () => {
           <h2 className="mx-auto">Categories and Tags</h2>
         </div>
         <div className="row mx-0 mt-4 px-5">
-          <div className="col-md-6 col-sm-12">
+          <div className="col-12 col-md-6">
             <Category />
           </div>
-          <div className="col-md-6 col-sm-12">
+          <div className="col-12 col-md-6">
             <Tag />
           </div>
         </div>

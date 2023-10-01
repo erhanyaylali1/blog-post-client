@@ -21,7 +21,7 @@ const UserTrends = ({ id }) => {
   const carouselPost = () => {
     if (trends?.length > 0) {
       return (
-        <Carousel autoplay autoplaySpeed={2000}>
+        <Carousel autoplay autoplaySpeed={2000} dots dotPosition="bottom">
           {trends.map((trend) => (
             <CarouselItem post={trend} key={trend._id} />
           ))}
@@ -31,7 +31,7 @@ const UserTrends = ({ id }) => {
   };
 
   return (
-    <div className="p-5 text-align">
+    <div className="p-0 px-md-5 my-5 text-align">
       <div
         style={{
           textAlign: 'left',

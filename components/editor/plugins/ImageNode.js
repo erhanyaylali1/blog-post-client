@@ -178,7 +178,7 @@ function ImageComponent({
         <div
           draggable={draggable}
           style={style}
-          className="editor-paragraph imported-image">
+          className="editor-paragraph imported-image mw-100">
           <LazyImage
             className={isFocused ? 'focused' : null}
             src={src}
@@ -339,7 +339,7 @@ export class ImageNode extends DecoratorNode {
   decorate() {
     return (
       <ImageComponent
-        style={{ width: 'max-content', position: 'relative' }}
+        style={{ width: 'max-content', maxWidth: '100%', position: 'relative' }}
         src={this.__src}
         altText={this.__altText}
         width={this.__width}
@@ -357,7 +357,7 @@ export class ImageNode extends DecoratorNode {
 export function $createImageNode({
   altText,
   height,
-  maxWidth = 700,
+  maxWidth = '100%',
   src,
   width,
   showCaption,

@@ -55,3 +55,42 @@
 .header_item_edit_input {
   width: 100%;
 }
+
+.username {
+  font-size: 3rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .username {
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+  .userinfo_wrapper {
+    padding-bottom: 1rem;
+  }
+  .ant_statistic_content div {
+    font-size: 16px !important;
+  }
+  .header_item_container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .header_item_title {
+    font-size: 16px;
+    line-height: 1.5rem;
+    width: 40%;
+    min-width: 40%;
+  }
+  
+  .header_item_text {
+    font-size: 15px;
+    line-height: 1.4rem;
+    width: 60%;
+    min-width: 60%;
+  }
+
+  .header_item_edit_input {
+    width: 60%;
+    min-width: 60%;
+  }
+}
