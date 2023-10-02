@@ -6,6 +6,7 @@ import { Empty, message } from 'antd';
 import HomePagePostCard from '../components/post/HomePagePostCard';
 import Link from 'next/link';
 import { CircularProgress } from '@mui/material';
+import { Analytics } from '@vercel/analytics/react';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -71,6 +72,7 @@ const Home = () => {
             <div className="mt-5">{renderPosts()}</div>
           </div>
           <div className="col-lg-3 col-sm-1" />
+          <Analytics />
         </div>
       </main>
     </Layout>
