@@ -16,6 +16,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
   const navigate = useNavigate();
   const user = isAuth();
   const token = getCookie('token'); 
+  const [loading, setLoading] = useState(false);
 
   const [title, setTitle] = useState(post?.title || '');
 
@@ -43,6 +44,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
   };
 
   const handleSave = () => {
+    setLoading(true);
     const formData = new FormData();
 
     const editor = document.querySelector('.editor-input');
@@ -61,8 +63,9 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
       } else {
         message
           .success(response.message, 1)
-          .then(() => navigate(window.location.pathname));
+          .then(() => navigate(0));
       }
+      setLoading(false);
     });
   };
 
@@ -142,7 +145,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
     });
   };
 
-  const cancel = () => navigate(window.location.pathname);
+  const cancel = () => navigate(0);
 
   if (categories.length === 0) return null;
   else {
@@ -280,6 +283,7 @@ const PostPageEdit = ({ post, refreshPage, isAdmin }) => {
                     size="large"
                     block
                     onClick={handleSave}
+                    loading={loading}
                     disabled={isButtonDisabled()}>
                     Save
                   </Button>

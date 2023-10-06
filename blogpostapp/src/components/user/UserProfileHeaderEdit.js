@@ -44,7 +44,7 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
   };
 
   const cancel = () => {
-    navigate(window.location.pathname);
+    navigate(0);
   };
 
   const handleSave = () => {
@@ -60,7 +60,7 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
       if (response.error) message.error(response.error);
       else {
         message.success(response.message, 0.5).then(() => {
-          navigate(window.location.pathname);
+          navigate(0);
         });
       }
     });
@@ -219,7 +219,7 @@ const UserProfileHeaderEdit = ({ user, setRefresh, countries }) => {
                       />
                     </div>
                   </div>
-                  <div className="col-12 col-md-4 mt-3 d-flex align-items-end justify-content-center">
+                  <div className="col-12 col-md-4 mt-3 d-flex align-items-end justify-content-center ml-auto">
                     <div className="row w-100">
                       <div className="col-6">
                         <Popconfirm

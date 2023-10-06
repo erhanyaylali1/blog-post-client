@@ -35,7 +35,7 @@ const UserProfileHeaderView = ({ user, countries }) => {
         <div className="row m-0 mt-4">
           <div className="col-12 mb-4 px-3">
             <div className={styles.header_item_title}>About</div>
-            <div className={`${styles.header_item_text} w-100`}>
+            <div className={`${styles.header_item_text} w-100`} style={{ textAlign: "left" }}>
               {user?.user?.about || '-'}
             </div>
           </div>
